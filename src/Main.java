@@ -50,7 +50,11 @@ public class Main {
                         System.out.println("Введите пароль: ");
                         admin.setPassword(new Scanner(System.in).nextLine());
                         if (adminService.signUp(admin).equals("успешно")){
+                            System.out.println("Вы успешно вошли в аккаунт");
                             isLogginTrue = true;
+                        }
+                        else {
+                            System.out.println("Неверно, попробуйте снова");
                         }break;
                     }
                     case "2": {
@@ -82,7 +86,7 @@ public class Main {
                     }
                     default:
                         throw new MyExceptions("такой опции нет");
-                }break;
+                }
             } catch (MyExceptions e) {
                 System.out.println(e.getMessage());
             }
@@ -282,7 +286,7 @@ public class Main {
                         break;
                     }
                     default:
-                        throw new MyExceptions("акой опции нет");
+                        throw new MyExceptions("такой опции нет");
                 }
             } catch (MyExceptions e) {
                 System.out.println(e.getMessage());

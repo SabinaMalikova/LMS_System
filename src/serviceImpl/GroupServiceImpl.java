@@ -21,10 +21,9 @@ public class GroupServiceImpl implements GroupService {
                 DataBase.groups.add(group);
                 System.out.println("успешно добавлена");
                 return group;
-            }else {
-                throw new MyExceptions("такая группа уже существует!");
             }
-        }catch (MyExceptions e){
+            throw new MyExceptions("такая группа уже существует!");
+        } catch (MyExceptions e) {
             System.out.println(e.getMessage());
         }
         return null;
@@ -32,34 +31,32 @@ public class GroupServiceImpl implements GroupService {
 
     @Override
     public Group getGroupByName(String name) {
-        for (Group group : DataBase.groups) {
-            try {
+        try {
+            for (Group group : DataBase.groups) {
                 if (group.getGroupName().equalsIgnoreCase(name)) {
                     return group;
-                } else {
-                    throw new MyExceptions("нет такой группы");
                 }
-            } catch (MyExceptions e) {
-                System.out.println(e.getMessage());
             }
+            throw new MyExceptions("нет такой группы");
+        } catch (MyExceptions e) {
+            System.out.println(e.getMessage());
         }
         return null;
     }
 
     @Override
     public Group updateGroupName(String name, Group group) {
-        for (int i = 0; i < DataBase.groups.size(); i++) {
-            Group group1 = DataBase.groups.get(i);
-            try {
+        try {
+            for (int i = 0; i < DataBase.groups.size(); i++) {
+                Group group1 = DataBase.groups.get(i);
                 if (group1.getGroupName().equalsIgnoreCase(name)) {
                     DataBase.groups.set(i, group);
                     return group;
-                } else {
-                    throw new MyExceptions("нет такой группы");
                 }
-            } catch (MyExceptions e) {
-                System.out.println(e.getMessage());
             }
+            throw new MyExceptions("нет такой группы");
+        } catch (MyExceptions e) {
+            System.out.println(e.getMessage());
         }
         return null;
     }
@@ -71,18 +68,16 @@ public class GroupServiceImpl implements GroupService {
 
     @Override
     public String deleteGroup(String groupName) {
-        for (Group group : DataBase.groups) {
-            try {
+        try {
+            for (Group group : DataBase.groups) {
                 if (group.getGroupName().equalsIgnoreCase(groupName)) {
                     DataBase.groups.remove(group);
                     return "успешно удалено";
-                } else {
-                    throw new MyExceptions("нет такой группы");
                 }
-            }catch (MyExceptions e){
-                System.out.println(e.getMessage());
             }
+            throw new MyExceptions("нет такой группы");
+        } catch (MyExceptions e) {
+            return e.getMessage();
         }
-        return null;
     }
 }

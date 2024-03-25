@@ -13,6 +13,7 @@ public class Student {
 
     private String password;             // не меньше 7 символов
     private Gender gender;
+    private List<Lesson>lessons = new ArrayList<>();
 
 
 
@@ -69,14 +70,22 @@ public class Student {
         this.gender = gender;
     }
 
+    public List<Lesson> getLessons() {
+        return lessons;
+    }
+
+    public void setLessons(List<Lesson> lessons) {
+        this.lessons = lessons;
+    }
 
     @Override
     public String toString() {
-        return "Student \n" +
-                "имя: " + name + "\n"+
-                "фамилия: " + lastName + "\n"+
-                "email: " + email + "\n"+
-                "password: " + password + "\n"+
-                "пол: " + gender +"\n";
+        return "\nStudent{" + "\n"+
+                "name: " + name + "\n" +
+                "lastName: " + lastName + "\n" +
+                "email: " + email + "\n" +
+                "password: " + password + "\n" +
+                "gender: " + gender +
+                "lessons: " + lessons;
     }
 }
