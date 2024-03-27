@@ -13,30 +13,24 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public String addNewStudentForGroup(String groupName, Student student) {
         try {
-            // Проверяем наличие группы
             for (Group group : DataBase.groups) {
                 if (group.getGroupName().equalsIgnoreCase(groupName)) {
-                    boolean isExistingEmail = false;
-                    // Проверяем наличие студента с таким же email
+                    boolean isEmailTrue = false;
                     for (Student existingStudent : group.getStudents()) {
                         if (existingStudent.getEmail().equals(student.getEmail())) {
-                            isExistingEmail = true;
-                            break; // Нет смысла продолжать итерации, если нашли совпадение
+                            isEmailTrue = true;
+                            break;
                         }
                     }
-                    // Если студент с таким email уже есть в группе, выбрасываем исключение
-                    if (isExistingEmail) {
+                    if (isEmailTrue) {
                         throw new MyExceptions("Такой email уже существует в данной группе");
                     }
-                    // Если все в порядке, добавляем студента и завершаем метод
                     group.getStudents().add(student);
                     return "Студент успешно добавлен в группу";
                 }
             }
-            // Если группа с таким названием не найдена, выбрасываем исключение
             throw new MyExceptions("Группа с указанным названием не найдена");
         } catch (MyExceptions e) {
-            // Ловим исключения и возвращаем сообщение об ошибке
             return e.getMessage();
         }
     }
